@@ -1,6 +1,6 @@
 # PLANO — Curso 4 · Segurança e confiança entre site e agente (Formação WebMCP v7.2)
 
-Repo `inematds/formacao-webmcp-seguranca-v72`. Público: quem já fez os cursos 1–3 (servidor MCP, WebMCP na página, agentes de navegador). Sai com a auditoria de segurança do próprio site + servidor. Escrito em 19/10/2026, antes do conteúdo. Fontes: `../wifi/longrun/2026-10-19-formacao-webmcp-v72/{CURRICULO,AUDITORIA-LOCAL,PESQUISA-ESTADO-DA-ARTE,BRIEF-CURSO,decisions}.md`.
+Repo `linnoff88-dev/formacao-webmcp-seguranca-v72`. Público: quem já fez os cursos 1–3 (servidor MCP, WebMCP na página, agentes de navegador). Sai com a auditoria de segurança do próprio site + servidor. Escrito em 19/10/2026, antes do conteúdo. Fontes: `../wifi/longrun/2026-10-19-formacao-webmcp-v72/{CURRICULO,AUDITORIA-LOCAL,PESQUISA-ESTADO-DA-ARTE,BRIEF-CURSO,decisions}.md`.
 
 Fonte de verdade: **WebMCP, Draft Community Group Report de 16/10/2026** (https://webmachinelearning.github.io/webmcp/, baixado e lido em 19/10/2026), em especial §4.2 (anotações, `exposedTo`, `fromOrigins`), §4.4 (permissions policy `tools`) e §6 (Security and Privacy Considerations, não normativa). MCP **revisão 2026-07-28** (`security_best_practices`, `authorization`, changelog). Comportamento medido no **Chromium 156.0.8078.4 do Playwright 1.64.0** com `--enable-features=WebMCPTesting` e no **SDK oficial v2 `@modelcontextprotocol/server` 2.3.1** (`MODERN_PROTOCOL_VERSION = "2026-07-28"` no `dist/`). Web Bot Auth: `draft-ietf-webbotauth-httpsig-protocol-00` (publicado em 01/09/2026, expira em 05/03/2027) + RFC 9421.
 
@@ -67,7 +67,7 @@ Legenda: **confere** (com a PESQUISA, com a spec de 16/10 ou com o que rodou aqu
 | `security_best_practices` 2026-07-28 | token passthrough proibido; "MUST NOT accept any tokens that were not explicitly issued for the MCP server"; state handle não é autenticação; servidor local: stdio ou HTTP com token; escopo mínimo + step-up | confere [FATO] | aula 5 |
 | `authorization` 2026-07-28 | token nunca na query string; servidor valida audiência (RFC 8707); cliente valida `iss` (RFC 9207) | confere | aula 5 (o `iss` é do cliente: só uma frase + link para o curso 1) |
 | changelog 2026-07-28 | credenciais do cliente presas ao servidor de autorização que as emitiu (SEP-2352) | confere | aula 5 |
-| `inema-agent-runtime/runtime/POLITICA.md` (5cb431b) | níveis N0–N4; "nunca passe credencial de uma ferramenta para outra" | confere (ideia) | aulas 3 e 5 (teto por ação; nada de passthrough) |
+| `ARCKHÉ-agent-runtime/runtime/POLITICA.md` (5cb431b) | níveis N0–N4; "nunca passe credencial de uma ferramenta para outra" | confere (ideia) | aulas 3 e 5 (teto por ação; nada de passthrough) |
 | draft Web Bot Auth -00 | `Signature-Agent` (dicionário, https), JWKS em `/.well-known/http-message-signatures-directory`, `tag="web-bot-auth"`, `created`/`expires` (≤ 24 h recomendado), `keyid` = thumbprint JWK; replay possível dentro da validade; não autentica pessoa nem autoriza (§4.1, §4.6) | confere | aula 6 |
 | Cloudflare "Verified bots" (atualizada 08/10/2026) | desde 01/07/2026 signed agents contam como Verified; campo Direct × Intermediary | confere | aula 6 |
 | PESQUISA §4.6 | "Cloudflare + Google" no draft | confere (autores Meunier/Cloudflare e Major/Google) | aula 6 |
@@ -78,7 +78,7 @@ Data da posição do WebKit; versão em que o Chrome tirou `navigator.modelConte
 ### Chamadas de modelo
 Nenhuma. Nenhuma prática depende de modelo, chave de API ou extensão com chave. Ataque de prompt injection aparece como **texto** (filtro, canário, linter), nunca rodado contra um modelo (isso é a LOOP-R, aula `injecao`).
 
-Baseline dos repos de fonte (não alterados), 19/10/2026: webmcp-1-formacao eb037fb · webmcp-2-builder 676c46e · webmcp-3-integrator 1c81fe8 · webmcp-4-agent-developer f4d8c69 · webmcp-5-expert c1ee007 · webmcp-readiness 9ae7d73 · aiv2026 097d98f · astra-computer-use 30ad91a · agi-pratica 03577c0 · MCP 2124c29 · inema-agent-runtime 5cb431b.
+Baseline dos repos de fonte (não alterados), 19/10/2026: webmcp-1-formacao eb037fb · webmcp-2-builder 676c46e · webmcp-3-integrator 1c81fe8 · webmcp-4-agent-developer f4d8c69 · webmcp-5-expert c1ee007 · webmcp-readiness 9ae7d73 · aiv2026 097d98f · astra-computer-use 30ad91a · agi-pratica 03577c0 · MCP 2124c29 · ARCKHÉ-agent-runtime 5cb431b.
 
 ## Kit (`kit/`)
 `package.json` com versões fixas (playwright 1.64.0; `@modelcontextprotocol/server`/`client` 2.3.1, `node` 2.1.1; zod 4.6.7). Página de exemplo `pagina/` (agenda de mentorias) com **dois furos de propósito** (`ler_avaliacoes` sem `untrustedContentHint`; `cancelar_agendamento` sem anotação e sem confirmação) que o aluno conserta nas aulas 2 e 3 (`solucao/` tem a versão consertada). `lib/navegador.mjs` (servidor local + Chromium nos modos `sem` e `nativo`). Scripts: `filtro.mjs` (a1), `checar.mjs` (a2/a3), `exposicao.mjs` (a4), `mcp/servidor.mjs` + `atacar-mcp.mjs` + `segredos.mjs` (a5), `wba.mjs` (a6), `ameacas.mjs` + `ficha.mjs` (a7), `auditar.mjs` (a8). Blocos `blocos/aN[x]-*.sh` → `saidas/*.txt` por `capturar.sh` (TMPDIR curto em /tmp, timeout 300 s, `echo "saída: $?"` em todo bloco, versão na 1ª linha).
@@ -96,7 +96,7 @@ Baseline dos repos de fonte (não alterados), 19/10/2026: webmcp-1-formacao eb03
 | 7 | ameacas | Modelagem de ameaças de uma ferramenta | modelar as ameaças de cada ferramenta com as categorias da spec e passar o catálogo num linter que acha envenenamento, excesso de parâmetros e efeito escondido. | ferramenta → 7 categorias (§6.3) → controle → teste | `node scripts/ameacas.mjs catalogos/ruim.mjs` → `6 achados · saída: 1`; o seu → `0 achados`; `node scripts/ficha.mjs <sua-ficha>` → `7/7 categorias com controle` |
 | 8 | auditoria | Auditoria de segurança do seu site e servidor | rodar a auditoria completa (página, exposição, servidor, segredos, catálogo), ver uma quebra ser pega e sair com o plano datado de revisão. | mapa 4 degraus + gerador | `node scripts/auditar.mjs` → `AUDITORIA: 6/6 ok · saída: 0`; com um segredo plantado → `5/6` e saída 1 |
 
-Quiz: 3–5 perguntas por aula; certa variando entre A/B/C/D e **nunca** a opção mais longa. Links da aula 8: curso seguinte `https://inematds.github.io/formacao-webmcp-expert-v72/` (ainda não publicado em 19/10/2026); tríade letal → `https://inematds.github.io/loop-r-eng-seguranca-v72/aulas/triade/`; injeção reproduzida com agente falso → `…/aulas/injecao/`; evals → `loop-r-eng-verificacao-v72`.
+Quiz: 3–5 perguntas por aula; certa variando entre A/B/C/D e **nunca** a opção mais longa. Links da aula 8: curso seguinte `https://linnoff88-dev.github.io/ (ainda não publicado em 19/10/2026); tríade letal → `https://linnoff88-dev.github.io/ injeção reproduzida com agente falso → `…/aulas/injecao/`; evals → `loop-r-eng-verificacao-v72`.
 
 ## Desvios do CURRICULO (com motivo)
 - Títulos levemente encurtados para caber no menu (mesma ordem e mesmo tema das 8 aulas).
@@ -105,4 +105,4 @@ Quiz: 3–5 perguntas por aula; certa variando entre A/B/C/D e **nunca** a opç�
 - Slug da aula 5 escolhido livre (`servidor-seguro`): os cursos 0, 1 e 2 linkam a **raiz** deste curso, não uma aula.
 
 ## Fora deste curso (dono por link)
-Registrar ferramenta/anotações como API → curso 2. Agente consumidor e `fromOrigins` do lado do agente → curso 3. OAuth completo → curso 1. Tríade letal, injeção contra agente falso, sandbox, hooks → LOOP-R `loop-r-eng-seguranca-v72`. Evals → `loop-r-eng-verificacao-v72`. robots/GEO → inemaSEO.
+Registrar ferramenta/anotações como API → curso 2. Agente consumidor e `fromOrigins` do lado do agente → curso 3. OAuth completo → curso 1. Tríade letal, injeção contra agente falso, sandbox, hooks → LOOP-R `loop-r-eng-seguranca-v72`. Evals → `loop-r-eng-verificacao-v72`. robots/GEO → ARCKHÉSEO.

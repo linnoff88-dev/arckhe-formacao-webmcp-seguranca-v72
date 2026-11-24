@@ -109,7 +109,7 @@
         {
           "rot": "Terminal · instalar",
           "icone": "terminal",
-          "conteudo": "git clone https://github.com/inematds/formacao-webmcp-seguranca-v72 ~/projetos/formacao-webmcp-seguranca-v72\ncd ~/projetos/formacao-webmcp-seguranca-v72/kit\nnpm ci && npx playwright@1.64.0 install chromium\necho \"saída: $?\""
+          "conteudo": "git clone https://github.com/linnoff88-dev/formacao-webmcp-seguranca-v72 ~/projetos/formacao-webmcp-seguranca-v72\ncd ~/projetos/formacao-webmcp-seguranca-v72/kit\nnpm ci && npx playwright@1.64.0 install chromium\necho \"saída: $?\""
         }
       ],
       "saida": {
@@ -284,11 +284,11 @@
         },
         {
           "t": "Formación LOOP-R: la tríada letal",
-          "href": "https://inematds.github.io/loop-r-eng-seguranca-v72/es/aulas/triade/"
+          "href": "https://linnoff88-dev.github.io/
         },
         {
           "t": "Formación LOOP-R: inyección reproducida con un agente falso",
-          "href": "https://inematds.github.io/loop-r-eng-seguranca-v72/es/aulas/injecao/"
+          "href": "https://linnoff88-dev.github.io/
         }
       ]
     }

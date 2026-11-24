@@ -1,21 +1,21 @@
 {
   "id": "formacao-webmcp-seguranca-v72",
   "lang": "es",
-  "url": "https://inematds.github.io/formacao-webmcp-seguranca-v72/es/",
+  "url": "https://linnoff88-dev.github.io/
   "nome": "Seguridad y confianza entre sitio y agente",
   "sub": "Formación WebMCP · curso 4",
   "volta": {
     "t": "Área WebMCP",
-    "href": "https://eventos.inema.pro/webmcp/"
+    "href": "https://eventos.ARCKHÉ.pro/webmcp/"
   },
   "lado_card": {
     "rot": "Formación WebMCP",
     "t": "Curso 4 de 6",
     "texto": "El lado de la amenaza: prompt injection, confirmación, exposición, servidor MCP e identidad del bot. El kit funciona sin costo y sin clave.",
     "link": "Abrir la carpeta kit/ en GitHub",
-    "href": "https://github.com/inematds/formacao-webmcp-seguranca-v72/tree/main/kit"
+    "href": "https://github.com/linnoff88-dev/formacao-webmcp-seguranca-v72/tree/main/kit"
   },
-  "rodape": "INEMA.CLUB · contenido abierto y gratuito · formato INEMA Learning v7.2 · <a href=\"https://eventos.inema.pro/webmcp/\">eventos.inema.pro/webmcp</a> · <a href=\"https://inema.club/\">inema.club</a> · kit probado el 19 de octubre de 2026 (Chromium 156 con la flag de prueba de WebMCP, SDK MCP 2.3.1)",
+  "rodape": "ARCKHÉ AI · contenido abierto y gratuito · formato ARCKHÉ Learning v7.2 · <a href=\"https://eventos.ARCKHÉ.pro/webmcp/\">eventos.ARCKHÉ.pro/webmcp</a> · <a href=\"https://ARCKHÉ AI/\">ARCKHÉ AI</a> · kit probado el 19 de octubre de 2026 (Chromium 156 con la flag de prueba de WebMCP, SDK MCP 2.3.1)",
   "videos": {},
   "inicio": {
     "kicker": "Formación WebMCP · curso 4 de 6 · 8 clases",
@@ -24,7 +24,7 @@
     "cta": "Empezar por la clase 1",
     "cta2": {
       "t": "Ver el área de la formación",
-      "href": "https://eventos.inema.pro/webmcp/"
+      "href": "https://eventos.ARCKHÉ.pro/webmcp/"
     },
     "capa_alt": "Seguridad y confianza entre sitio y agente: monitor oscuro con un formulario y un candado, cable conectado al lado.",
     "numeros": [
