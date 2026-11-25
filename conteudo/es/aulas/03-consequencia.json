@@ -103,7 +103,7 @@
         {
           "rot": "Fragmento · kit/solucao/aula3/ferramentas.mjs",
           "icone": "arquivo",
-          "conteudo": "      annotations: { consequentialHint: true },              // clase 3: avisa que la acción tiene consecuencias\n      execute: util(async ({ codigo }, { signal }) => {\n        const ag = agenda.agendamentos().find(a => a.codigo === codigo);\n        if (!ag) throw new Error(`agendamento não encontrado: ${codigo}`);\n        // la pregunta dice el objetivo y el efecto completos; cancelar la ejecución (signal) vale como \"no\"\n        const ok = await ui.pedirConfirmacao(`Cancelar o agendamento ${ag.codigo} (${ag.id}, ${ag.nome})? A vaga volta para a agenda.`, signal);\n        if (!ok) return { cancelado: false, motivo: 'a pessoa recusou na tela' };\n        agenda.cancelar(codigo);\n        ui.atualizar();\n        return { cancelado: true, agendamento: ag };\n      })"
+          "conteudo": "      annotations: { consequentialHint: true },              // clase 3: avisa que la acción tiene consecuencias\n      execute: util(async ({ codigo }, { signal }) => {\n        const ag = agenda.agendamentos().find(a => a.codigo === codigo);\n        if (!ag) throw new Error(`agendamento nêo encontrado: ${codigo}`);\n        // la pregunta dice el objetivo y el efecto completos; cancelar la ejecución (signal) vale como \"no\"\n        const ok = await ui.pedirConfirmacao(`Cancelar o agendamento ${ag.codigo} (${ag.id}, ${ag.nome})? A vaga volta para a agenda.`, signal);\n        if (!ok) return { cancelado: false, motivo: 'a pessoa recusou na tela' };\n        agenda.cancelar(codigo);\n        ui.atualizar();\n        return { cancelado: true, agendamento: ag };\n      })"
         },
         {
           "rot": "Terminal · checar después",
@@ -116,7 +116,7 @@
         "abas": [
           {
             "rot": "Salida capturada (19 de octubre de 2026)",
-            "html": "<pre>== Chromium 156.0.8078.4 (Playwright) · modo: nativo\nok    buscar_mentorias: só leitura, sem texto de terceiro\nok    ler_avaliacoes: devolve texto de terceiro e está marcada com untrustedContentHint\nok    meus_agendamentos: só leitura, sem texto de terceiro\nok    agendar_mentoria: consequentialHint + confirmação; recusar não mudou nada\nok    cancelar_agendamento: consequentialHint + confirmação; recusar não mudou nada\nRESULTADO: 0 falhas\nsaída: 0</pre><p>Antes del arreglo, la misma línea decía <code>FALHA cancelar_agendamento: agiu sem pedir confirmação</code> (salida de la clase 2).</p>"
+            "html": "<pre>== Chromium 156.0.8078.4 (Playwright) · modo: nativo\nok    buscar_mentorias: só leitura, sem texto de terceiro\nok    ler_avaliacoes: devolve texto de terceiro e está marcada com untrustedContentHint\nok    meus_agendamentos: só leitura, sem texto de terceiro\nok    agendar_mentoria: consequentialHint + confirmaçêo; recusar nêo mudou nada\nok    cancelar_agendamento: consequentialHint + confirmaçêo; recusar nêo mudou nada\nRESULTADO: 0 falhas\nsaída: 0</pre><p>Antes del arreglo, la misma línea decía <code>FALHA cancelar_agendamento: agiu sem pedir confirmaçêo</code> (salida de la clase 2).</p>"
           }
         ]
       }
@@ -138,7 +138,7 @@
           "titulo": "E8 · Rómpelo a propósito",
           "min": "5 min",
           "texto": "En <code>agendar_mentoria</code>, cambia <code>const ok = await ui.pedirConfirmacao(…)</code> por <code>const ok = true</code> y ejecuta el verificador. Después deshaz el cambio.",
-          "pronto": "<code>FALHA agendar_mentoria: agiu sem pedir confirmação</code> y <code>saída: 1</code>; deshecho, <code>RESULTADO: 0 falhas</code>."
+          "pronto": "<code>FALHA agendar_mentoria: agiu sem pedir confirmaçêo</code> y <code>saída: 1</code>; deshecho, <code>RESULTADO: 0 falhas</code>."
         },
         {
           "id": "e9",

@@ -39,10 +39,10 @@ node scripts/exposicao.mjs; echo &quot;saída: $?&quot;</pre></div><div class="c
     parent.postMessage({ iframe: estado }, &#x27;*&#x27;);
   })();
 &lt;/script&gt;</pre></div></div><div class="saida"><div class="saida-tabs" role="tablist"><button type="button" data-alvo="s0" aria-selected="true">Salida capturada (19 de octubre de 2026)</button></div><div class="saida-corpo" data-painel="s0"><span class="selo real">Ejemplo del repositorio</span><pre>== Chromium 156.0.8078.4 (Playwright) · modo: nativo
-confere 0 · iframe da MESMA origem, sem nada → vê: mesma origem é o padrão
+confere 0 · iframe da MESMA origem, sem nada → vê: mesma origem é o padrêo
 confere A · iframe de outra origem, sem allow="tools" → iframe recusado (NotAllowedError)
-confere B · allow="tools", sem exposedTo → topo não vê
-confere C · allow + exposedTo:[topo], topo sem fromOrigins → topo não vê
+confere B · allow="tools", sem exposedTo → topo nêo vê
+confere C · allow + exposedTo:[topo], topo sem fromOrigins → topo nêo vê
 confere D · allow + exposedTo:[topo] + fromOrigins:[iframe] → topo VÊ a ferramenta do iframe
 confere E · topo com Permissions-Policy: tools=() → topo e iframe recusados
 confere F · exposedTo com origem http:// pública → iframe recusado (SecurityError)

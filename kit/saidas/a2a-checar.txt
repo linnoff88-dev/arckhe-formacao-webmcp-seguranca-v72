@@ -2,8 +2,8 @@
 ok    buscar_mentorias: só leitura, sem texto de terceiro
 FALHA ler_avaliacoes: devolve texto de terceiro sem untrustedContentHint
 ok    meus_agendamentos: só leitura, sem texto de terceiro
-ok    agendar_mentoria: consequentialHint + confirmação; recusar não mudou nada
+ok    agendar_mentoria: consequentialHint + confirmaçêo; recusar nêo mudou nada
 FALHA cancelar_agendamento: muda estado sem consequentialHint
-FALHA cancelar_agendamento: agiu sem pedir confirmação
+FALHA cancelar_agendamento: agiu sem pedir confirmaçêo
 RESULTADO: 3 falhas
 saída: 1

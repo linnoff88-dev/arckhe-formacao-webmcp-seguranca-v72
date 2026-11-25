@@ -1,8 +1,8 @@
 == Chromium 156.0.8078.4 (Playwright) · modo: nativo
-confere 0 · iframe da MESMA origem, sem nada → vê: mesma origem é o padrão
+confere 0 · iframe da MESMA origem, sem nada → vê: mesma origem é o padrêo
 confere A · iframe de outra origem, sem allow="tools" → iframe recusado (NotAllowedError)
-confere B · allow="tools", sem exposedTo → topo não vê
-confere C · allow + exposedTo:[topo], topo sem fromOrigins → topo não vê
+confere B · allow="tools", sem exposedTo → topo nêo vê
+confere C · allow + exposedTo:[topo], topo sem fromOrigins → topo nêo vê
 confere D · allow + exposedTo:[topo] + fromOrigins:[iframe] → topo VÊ a ferramenta do iframe
 confere E · topo com Permissions-Policy: tools=() → topo e iframe recusados
 confere F · exposedTo com origem http:// pública → iframe recusado (SecurityError)

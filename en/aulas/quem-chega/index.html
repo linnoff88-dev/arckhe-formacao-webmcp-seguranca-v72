@@ -26,9 +26,9 @@ saída: 0</pre><p>Ed25519 is deterministic: same key and same base give the same
 node scripts/wba.mjs demo; echo &quot;saída: $?&quot;</pre></div></div><div class="saida"><div class="saida-tabs" role="tablist"><button type="button" data-alvo="s0" aria-selected="true">Captured output (October 19, 2026)</button></div><div class="saida-corpo" data-painel="s0"><span class="selo real">Example from the repository</span><pre>== node v24.13.0 · draft-ietf-webbotauth-httpsig-protocol-00 (01/09/2026) · origem http://127.0.0.1:36913
 1 · sem assinatura → anônimo: sem assinatura (a política do site decide)
 2 · assinado, válido → identificado: https://agente.exemplo (chave gw6T0rIc…)
-3 · mesma assinatura em outro caminho → recusado: assinatura não confere
+3 · mesma assinatura em outro caminho → recusado: assinatura nêo confere
 4 · assinatura vencida → recusado: assinatura vencida
-5 · chave que a origem não conhece → recusado: chave desconhecida para https://agente.exemplo
+5 · chave que a origem nêo conhece → recusado: chave desconhecida para https://agente.exemplo
 6 · replay dentro da validade → identificado: https://agente.exemplo (chave gw6T0rIc…)
 7 · assinatura mínima (só @authority) usada em /admin → identificado: https://agente.exemplo (chave gw6T0rIc…)
 7/7 casos como esperado · replay dentro da validade: aceito

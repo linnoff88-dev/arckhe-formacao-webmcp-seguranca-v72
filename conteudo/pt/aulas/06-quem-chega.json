@@ -5,8 +5,8 @@
   "titulo": "Identificar quem chega: Web Bot Auth e signed agents (rascunho IETF)",
   "titulo_curto": "Quem chega",
   "minutos": 18,
-  "lead": "User-Agent qualquer um escreve. Web Bot Auth é a proposta do IETF para o bot assinar cada pedido com uma chave publicada numa URL dele. Ainda é rascunho (-00, setembro de 2026). Nesta aula você confere uma assinatura contra o vetor do draft e vê num servidor local o que ela prova e o que não prova.",
-  "objetivo": "conferir uma assinatura Web Bot Auth com o vetor do draft e verificar pedidos assinados num servidor local, sabendo o que a assinatura não prova.",
+  "lead": "User-Agent qualquer um escreve. Web Bot Auth é a proposta do IETF para o bot assinar cada pedido com uma chave publicada numa URL dele. Ainda é rascunho (-00, setembro de 2026). Nesta aula você confere uma assinatura contra o vetor do draft e vê num servidor local o que ela prova e o que nêo prova.",
+  "objetivo": "conferir uma assinatura Web Bot Auth com o vetor do draft e verificar pedidos assinados num servidor local, sabendo o que a assinatura nêo prova.",
   "competencias": [
     "explicar-web-bot-auth",
     "verificar-assinatura-http",
@@ -27,10 +27,10 @@
     },
     {
       "icone": "usuario",
-      "t": "Identidade não é autorização: a política continua sua"
+      "t": "Identidade nêo é autorizaçêo: a política continua sua"
     }
   ],
-  "hero_alt": "Crachá metálico sem inscrição sobre teclado escuro, ao lado de um cabo de rede, luz neutra.",
+  "hero_alt": "Crachá metálico sem inscriçêo sobre teclado escuro, ao lado de um cabo de rede, luz neutra.",
   "secoes": [
     {
       "tipo": "diagrama",
@@ -53,7 +53,7 @@
           "icone": "seta",
           "titulo": "Signature-Agent",
           "sub": "a URL dele",
-          "detalhe": "Cabeçalho em forma de dicionário com a URL https do diretório. Até a origem buscar essa URL e achar a chave que confere, é só uma alegação."
+          "detalhe": "Cabeçalho em forma de dicionário com a URL https do diretório. Até a origem buscar essa URL e achar a chave que confere, é só uma alegaçêo."
         },
         {
           "icone": "lupa",
@@ -66,10 +66,10 @@
           "icone": "portao",
           "titulo": "Política",
           "sub": "do site",
-          "detalhe": "Permitir, limitar, bloquear: decisão sua. O draft diz que a assinatura não fala nada sobre quem opera o agente, se ele é benigno ou se o pedido é autorizado (§4.1, §4.6)."
+          "detalhe": "Permitir, limitar, bloquear: decisêo sua. O draft diz que a assinatura nêo fala nada sobre quem opera o agente, se ele é benigno ou se o pedido é autorizado (§4.1, §4.6)."
         }
       ],
-      "legenda": "Rascunho de grupo do IETF (Cloudflare e Google), expira em 05/03/2027. Não é RFC."
+      "legenda": "Rascunho de grupo do IETF (Cloudflare e Google), expira em 05/03/2027. Nêo é RFC."
     },
     {
       "tipo": "codigo",
@@ -87,7 +87,7 @@
         "abas": [
           {
             "rot": "Saída capturada (19/10/2026)",
-            "html": "<pre>== node v24.13.0 · draft-ietf-webbotauth-httpsig-protocol-00 (01/09/2026)\nkeyid calculado: poqkLGiymh_W0uP6PZFw-dvez3QJT5SolqXBCW38r0U · confere\nassinatura: RdNFx5Bj6au3YgAMQL/RzmUl… · confere\nvetor E.2.1: confere\nsaída: 0</pre><p>Ed25519 é determinístico: mesma chave e mesma base dão a mesma assinatura. Se a sua implementação refaz o vetor, ela monta a base de assinatura do jeito do draft. A chave de teste nunca vai para produção (anexo C.12 do draft).</p>"
+            "html": "<pre>== node v24.13.0 · draft-ietf-webbotauth-httpsig-protocol-00 (01/09/2026)\nkeyid calculado: poqkLGiymh_W0uP6PZFw-dvez3QJT5SolqXBCW38r0U · confere\nassinatura: RdNFx5Bj6au3YgAMQL/RzmUl… · confere\nvetor E.2.1: confere\nsaída: 0</pre><p>Ed25519 é determinístico: mesma chave e mesma base dêo a mesma assinatura. Se a sua implementaçêo refaz o vetor, ela monta a base de assinatura do jeito do draft. A chave de teste nunca vai para produçêo (anexo C.12 do draft).</p>"
           }
         ]
       }
@@ -95,7 +95,7 @@
     {
       "tipo": "codigo",
       "titulo": "Agente assina, origem confere: sete casos",
-      "sub": "Chave nova a cada execução. A origem já tem o diretório do agente, como o draft permite (§4.4); nada sai da sua máquina.",
+      "sub": "Chave nova a cada execuçêo. A origem já tem o diretório do agente, como o draft permite (§4.4); nada sai da sua máquina.",
       "blocos": [
         {
           "rot": "Terminal · demo",
@@ -108,7 +108,7 @@
         "abas": [
           {
             "rot": "Saída capturada (19/10/2026)",
-            "html": "<pre>== node v24.13.0 · draft-ietf-webbotauth-httpsig-protocol-00 (01/09/2026) · origem http://127.0.0.1:36913\n1 · sem assinatura → anônimo: sem assinatura (a política do site decide)\n2 · assinado, válido → identificado: https://agente.exemplo (chave gw6T0rIc…)\n3 · mesma assinatura em outro caminho → recusado: assinatura não confere\n4 · assinatura vencida → recusado: assinatura vencida\n5 · chave que a origem não conhece → recusado: chave desconhecida para https://agente.exemplo\n6 · replay dentro da validade → identificado: https://agente.exemplo (chave gw6T0rIc…)\n7 · assinatura mínima (só @authority) usada em /admin → identificado: https://agente.exemplo (chave gw6T0rIc…)\n7/7 casos como esperado · replay dentro da validade: aceito\nsaída: 0</pre><p>Os casos 6 e 7 são o aviso do draft (§5.2): dentro da validade, quem viu o pedido pode repeti-lo; e uma assinatura que cobre só <code>@authority</code> vale para qualquer caminho do site. Por isso: validade curta e <code>@method</code> + <code>@path</code> cobertos, e a origem pode exigir esses componentes.</p>"
+            "html": "<pre>== node v24.13.0 · draft-ietf-webbotauth-httpsig-protocol-00 (01/09/2026) · origem http://127.0.0.1:36913\n1 · sem assinatura → anônimo: sem assinatura (a política do site decide)\n2 · assinado, válido → identificado: https://agente.exemplo (chave gw6T0rIc…)\n3 · mesma assinatura em outro caminho → recusado: assinatura nêo confere\n4 · assinatura vencida → recusado: assinatura vencida\n5 · chave que a origem nêo conhece → recusado: chave desconhecida para https://agente.exemplo\n6 · replay dentro da validade → identificado: https://agente.exemplo (chave gw6T0rIc…)\n7 · assinatura mínima (só @authority) usada em /admin → identificado: https://agente.exemplo (chave gw6T0rIc…)\n7/7 casos como esperado · replay dentro da validade: aceito\nsaída: 0</pre><p>Os casos 6 e 7 sêo o aviso do draft (§5.2): dentro da validade, quem viu o pedido pode repeti-lo; e uma assinatura que cobre só <code>@authority</code> vale para qualquer caminho do site. Por isso: validade curta e <code>@method</code> + <code>@path</code> cobertos, e a origem pode exigir esses componentes.</p>"
           }
         ]
       }
@@ -126,7 +126,7 @@
         {
           "titulo": "Intermediário",
           "texto": [
-            "No Intermediary, você pode confiar no operador e não em cada usuário que dirige o agente. A Cloudflare chama isso de confiança transitiva."
+            "No Intermediary, você pode confiar no operador e nêo em cada usuário que dirige o agente. A Cloudflare chama isso de confiança transitiva."
           ]
         },
         {
@@ -138,7 +138,7 @@
         {
           "titulo": "Junto com robots",
           "texto": [
-            "robots.txt diz para que finalidade cada bot pode vir; a assinatura diz quem é. O robots a fundo é da Formação ARCKHÉSEO."
+            "robots.txt diz para que finalidade cada bot pode vir; a assinatura diz quem é. O robots a fundo é da Formaçêo ARCKHÉSEO."
           ]
         }
       ]
@@ -181,17 +181,17 @@
             "Que o bot é benigno e pode acessar qualquer página do site sem limite",
             "Que um usuário humano autorizou aquele pedido específico",
             "Que quem tem uma chave publicada naquela URL assinou o pedido",
-            "Que o pedido não pode ser repetido por mais ninguém"
+            "Que o pedido nêo pode ser repetido por mais ninguém"
           ],
           "certa": 2,
-          "explica": "O draft (§4.1) é explícito: diz quem tem a chave, não se é benigno nem se está autorizado. E dentro da validade pode haver replay.",
+          "explica": "O draft (§4.1) é explícito: diz quem tem a chave, nêo se é benigno nem se está autorizado. E dentro da validade pode haver replay.",
           "ref": "diagrama",
           "cert": true
         },
         {
           "p": "Por que a assinatura mínima (só @authority) foi aceita em /admin no caso 7?",
           "opcoes": [
-            "Ela não cobre o caminho: vale em qualquer rota",
+            "Ela nêo cobre o caminho: vale em qualquer rota",
             "Porque a chave de teste do RFC aceita qualquer caminho",
             "Porque /admin estava sem Permissions-Policy na resposta",
             "Porque o servidor ignorou o campo expires da assinatura"
@@ -204,9 +204,9 @@
           "p": "Qual é o status do Web Bot Auth em 19/10/2026?",
           "opcoes": [
             "RFC publicada, obrigatória para todos os bots de IA na web",
-            "Especificação do W3C, já implementada nos navegadores",
+            "Especificaçêo do W3C, já implementada nos navegadores",
             "Proposta só da Cloudflare, sem documento público",
-            "Internet-Draft de grupo do IETF (-00), ainda não RFC"
+            "Internet-Draft de grupo do IETF (-00), ainda nêo RFC"
           ],
           "certa": 3,
           "explica": "draft-ietf-webbotauth-httpsig-protocol-00, publicado em 01/09/2026, expira em 05/03/2027. Base estável: RFC 9421 (HTTP Message Signatures).",
@@ -215,8 +215,8 @@
         {
           "p": "Na Cloudflare, o que muda quando o agente é Intermediary?",
           "opcoes": [
-            "Ele não pode assinar os pedidos com Web Bot Auth",
-            "Muitos usuários o comandam; confiar no operador não basta",
+            "Ele nêo pode assinar os pedidos com Web Bot Auth",
+            "Muitos usuários o comandam; confiar no operador nêo basta",
             "Ele recebe acesso maior que um bot Direct em todas as páginas",
             "Ele precisa de token OAuth do seu servidor MCP"
           ],
@@ -232,7 +232,7 @@
       "itens": [
         {
           "t": "Assinatura",
-          "texto": "Prova quem tem a chave da URL, não intenção nem permissão."
+          "texto": "Prova quem tem a chave da URL, nêo intençêo nem permissêo."
         },
         {
           "t": "Cobertura",

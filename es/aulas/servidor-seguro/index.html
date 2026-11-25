@@ -75,7 +75,7 @@ export function criarServidorMcp({ seguro }) {
     }, async ({ rascunho }, ctx) =&gt; {
       const r = rascunhos.get(rascunho);
       // MCP 2026-07-28 no tiene sesión: tener el handle NO es estar autenticado. Verifica el dueño.
-      if (!r || (seguro &amp;&amp; r.dono !== usuario(ctx))) return { content: [{ type: &#x27;text&#x27;, text: &#x27;rascunho não encontrado&#x27; }], isError: true };
+      if (!r || (seguro &amp;&amp; r.dono !== usuario(ctx))) return { content: [{ type: &#x27;text&#x27;, text: &#x27;rascunho nêo encontrado&#x27; }], isError: true };
       return { content: [{ type: &#x27;text&#x27;, text: `rascunho de ${r.dono} para ${r.mentoria}` }] };
     });
 
@@ -87,7 +87,7 @@ export function criarServidorMcp({ seguro }) {
       ...(seguro &amp;&amp; { scopeChallenge: requireScopes(&#x27;mentorias:agendar&#x27;) })
     }, async ({ rascunho }, ctx) =&gt; {
       const r = rascunhos.get(rascunho);
-      if (!r || (seguro &amp;&amp; r.dono !== usuario(ctx))) return { content: [{ type: &#x27;text&#x27;, text: &#x27;rascunho não encontrado&#x27; }], isError: true };
+      if (!r || (seguro &amp;&amp; r.dono !== usuario(ctx))) return { content: [{ type: &#x27;text&#x27;, text: &#x27;rascunho nêo encontrado&#x27; }], isError: true };
       rascunhos.delete(rascunho);
       return { content: [{ type: &#x27;text&#x27;, text: `agendado: ${r.mentoria} para ${r.dono}` }] };
     });
@@ -145,7 +145,7 @@ bloqueado 1 · Host de fora (DNS rebinding) → HTTP 403 (Host recusado antes do
 bloqueado 2 · token na query string → invalid_token: Missing Authorization header
 bloqueado 3 · token de outro recurso → invalid_token: Token was not issued for this resource
 bloqueado 4 · escopo de leitura confirma agendamento → Insufficient scope: required "mentorias:agendar"
-bloqueado 5 · handle de outro usuário → rascunho não encontrado
+bloqueado 5 · handle de outro usuário → rascunho nêo encontrado
 bloqueado 6 · token vencido → invalid_token: Token has expired
 passaram: 0 de 6
 saída: 0</pre><p>Cada rechazo viene de un lugar: Host (guarda del adaptador Node), token y audiencia (SDK, con <code>expectedResource</code>), scope (<code>requireScopes</code>), handle (tu código).</p></div></div></div></section><section class="secao" id="s4"><div class="sec-cab"><div><h2><span class="sn">04</span><span class="sp" aria-hidden="true"> · </span>Qué es de quién</h2></div></div><div class="passos"><div class="passos-tabs" role="tablist" style="--n:4"><button type="button" class="ptab" role="tab" data-alvo="p0" aria-selected="true"><span class="pn">1</span><span><b>El SDK hace</b><small></small></span></button><button type="button" class="ptab" role="tab" data-alvo="p1" aria-selected="false"><span class="pn">2</span><span><b>Tú activas</b><small></small></span></button><button type="button" class="ptab" role="tab" data-alvo="p2" aria-selected="false"><span class="pn">3</span><span><b>Tú escribes</b><small></small></span></button><button type="button" class="ptab" role="tab" data-alvo="p3" aria-selected="false"><span class="pn">4</span><span><b>Nunca</b><small></small></span></button></div><div class="pcorpo" data-painel="p0"><div><h3>1. El SDK hace</h3><p>Lee el token solo del encabezado, rechaza el token sin vigencia o vencido y responde 403 con el scope que falta cuando la tool declara <code>requireScopes</code>.</p></div></div><div class="pcorpo" data-painel="p1" hidden><div><h3>2. Tú activas</h3><p><code>expectedResource</code> (audiencia), las guardas de Host y Origin, el servidor en 127.0.0.1 y el scope por tool. Servidor local que solo usa tu agente: stdio, que ni siquiera abre un puerto.</p></div></div><div class="pcorpo" data-painel="p2" hidden><div><h3>3. Tú escribes</h3><p>Handle aleatorio (<code>randomBytes</code>) y atado al usuario del token. La spec: "MUST NOT treat possession of a state handle as authentication".</p></div></div><div class="pcorpo" data-painel="p3" hidden><div><h3>4. Nunca</h3><p>Reenviar el token del cliente a otra API (token passthrough, prohibido por la spec) ni guardar secretos en un archivo del repositorio. El cliente también guarda la credencial por emisor y no la reutiliza con otro servidor de autorización (cambio de la 2026-07-28).</p></div></div></div></section><section class="secao" id="s5"><div class="sec-cab"><div><h2><span class="sn">05</span><span class="sp" aria-hidden="true"> · </span>Secretos fuera del repositorio</h2><p>Un verificador mínimo (no reemplaza a gitleaks ni al secret scanning de GitHub). El segundo comando planta una clave falsa en una carpeta de ensayo para que veas la alerta.</p></div></div><div class="cods"><div><div class="cod"><div class="cod-cab"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg><b>Terminal · secretos</b><button type="button" class="copiar" data-rot="Copiar" data-ok="Copiado"><svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg><span>Copiar</span></button></div><pre>cd ~/projetos/formacao-webmcp-seguranca-v72/kit

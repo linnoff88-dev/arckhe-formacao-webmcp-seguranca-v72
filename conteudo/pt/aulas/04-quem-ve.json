@@ -1,12 +1,12 @@
 {
   "slug": "quem-ve",
   "num": 4,
-  "menu": "Exposição",
+  "menu": "Exposiçêo",
   "titulo": "Quem vê a ferramenta: mesma origem, exposedTo, iframes e Permissions-Policy",
   "titulo_curto": "Quem vê a ferramenta",
   "minutos": 18,
-  "lead": "Por padrão, só a própria página e as de mesma origem enxergam a ferramenta. Um iframe de outra origem só aparece para o topo com três consentimentos, e um cabeçalho desliga tudo. Nesta aula você mede os sete casos no Chromium e põe Permissions-Policy: tools=() nas páginas que não precisam de WebMCP.",
-  "objetivo": "medir quem enxerga cada ferramenta (mesma origem, iframe, exposedTo, fromOrigins) e desligar o WebMCP com Permissions-Policy onde ele não deve existir.",
+  "lead": "Por padrêo, só a própria página e as de mesma origem enxergam a ferramenta. Um iframe de outra origem só aparece para o topo com três consentimentos, e um cabeçalho desliga tudo. Nesta aula você mede os sete casos no Chromium e põe Permissions-Policy: tools=() nas páginas que nêo precisam de WebMCP.",
+  "objetivo": "medir quem enxerga cada ferramenta (mesma origem, iframe, exposedTo, fromOrigins) e desligar o WebMCP com Permissions-Policy onde ele nêo deve existir.",
   "competencias": [
     "explicar-exposicao-por-origem",
     "configurar-exposedTo-e-allow-tools",
@@ -15,7 +15,7 @@
   "aprende": [
     {
       "icone": "camadas",
-      "t": "Origem = esquema + host + porta, e o padrão de exposição da spec"
+      "t": "Origem = esquema + host + porta, e o padrêo de exposiçêo da spec"
     },
     {
       "icone": "cadeado",
@@ -34,14 +34,14 @@
   "secoes": [
     {
       "tipo": "diagrama",
-      "titulo": "Os quatro controles de exposição",
+      "titulo": "Os quatro controles de exposiçêo",
       "sub": "Clique em cada um. Topo = a página principal; iframe = página de outra origem dentro dela.",
       "nos": [
         {
           "icone": "portao",
           "titulo": "Policy",
           "sub": "cabeçalho",
-          "detalhe": "<code>Permissions-Policy: tools=()</code> na resposta do servidor deixa a página e todos os iframes dela sem a API: <code>registerTool</code> e <code>getTools</code> falham com <code>NotAllowedError</code>. O padrão da feature <code>tools</code> é <code>'self'</code> (§4.4)."
+          "detalhe": "<code>Permissions-Policy: tools=()</code> na resposta do servidor deixa a página e todos os iframes dela sem a API: <code>registerTool</code> e <code>getTools</code> falham com <code>NotAllowedError</code>. O padrêo da feature <code>tools</code> é <code>'self'</code> (§4.4)."
         },
         {
           "icone": "cadeado",
@@ -63,7 +63,7 @@
           "detalhe": "<code>getTools({ fromOrigins: ['https://iframe.exemplo'] })</code>: o topo pede para ver aquela origem. Só com os três (allow, exposedTo e fromOrigins) o topo enxerga a ferramenta do iframe."
         }
       ],
-      "legenda": "Medido no Chromium 156.0.8078.4 com a flag de teste do WebMCP (experimental em 19/10/2026). A seção de fronteiras de origem da spec (§6.3.4) ainda é só uma nota de pendência."
+      "legenda": "Medido no Chromium 156.0.8078.4 com a flag de teste do WebMCP (experimental em 19/10/2026). A seçêo de fronteiras de origem da spec (§6.3.4) ainda é só uma nota de pendência."
     },
     {
       "tipo": "codigo",
@@ -71,7 +71,7 @@
       "sub": "O topo roda em 127.0.0.1 numa porta e o iframe em 127.0.0.1 noutra porta. Mesma máquina, porta diferente: origem diferente.",
       "blocos": [
         {
-          "rot": "Terminal · exposição",
+          "rot": "Terminal · exposiçêo",
           "icone": "terminal",
           "conteudo": "cd ~/projetos/formacao-webmcp-seguranca-v72/kit\nnode scripts/exposicao.mjs; echo \"saída: $?\""
         },
@@ -86,7 +86,7 @@
         "abas": [
           {
             "rot": "Saída capturada (19/10/2026)",
-            "html": "<pre>== Chromium 156.0.8078.4 (Playwright) · modo: nativo\nconfere 0 · iframe da MESMA origem, sem nada → vê: mesma origem é o padrão\nconfere A · iframe de outra origem, sem allow=\"tools\" → iframe recusado (NotAllowedError)\nconfere B · allow=\"tools\", sem exposedTo → topo não vê\nconfere C · allow + exposedTo:[topo], topo sem fromOrigins → topo não vê\nconfere D · allow + exposedTo:[topo] + fromOrigins:[iframe] → topo VÊ a ferramenta do iframe\nconfere E · topo com Permissions-Policy: tools=() → topo e iframe recusados\nconfere F · exposedTo com origem http:// pública → iframe recusado (SecurityError)\n7/7 casos conferem com a spec\nsaída: 0</pre><p>Só no caso D o topo vê a ferramenta do iframe, e o resultado traz a origem dela (<code>ferramenta_iframe@http://127.0.0.1:…</code>). O agente pode usar esse campo para não confundir de quem é a ferramenta.</p>"
+            "html": "<pre>== Chromium 156.0.8078.4 (Playwright) · modo: nativo\nconfere 0 · iframe da MESMA origem, sem nada → vê: mesma origem é o padrêo\nconfere A · iframe de outra origem, sem allow=\"tools\" → iframe recusado (NotAllowedError)\nconfere B · allow=\"tools\", sem exposedTo → topo nêo vê\nconfere C · allow + exposedTo:[topo], topo sem fromOrigins → topo nêo vê\nconfere D · allow + exposedTo:[topo] + fromOrigins:[iframe] → topo VÊ a ferramenta do iframe\nconfere E · topo com Permissions-Policy: tools=() → topo e iframe recusados\nconfere F · exposedTo com origem http:// pública → iframe recusado (SecurityError)\n7/7 casos conferem com a spec\nsaída: 0</pre><p>Só no caso D o topo vê a ferramenta do iframe, e o resultado traz a origem dela (<code>ferramenta_iframe@http://127.0.0.1:…</code>). O agente pode usar esse campo para nêo confundir de quem é a ferramenta.</p>"
           }
         ]
       }
@@ -96,15 +96,15 @@
       "titulo": "Regras para o seu site",
       "passos": [
         {
-          "titulo": "Padrão basta",
+          "titulo": "Padrêo basta",
           "texto": [
-            "Se a ferramenta é só da sua página, não use <code>exposedTo</code>. Mesma origem já vê, e nenhuma outra precisa."
+            "Se a ferramenta é só da sua página, nêo use <code>exposedTo</code>. Mesma origem já vê, e nenhuma outra precisa."
           ]
         },
         {
           "titulo": "Iframe de terceiro",
           "texto": [
-            "Widget de chat, anúncio, vídeo: iframe de outra origem sem <code>allow=\"tools\"</code>. Assim ele não registra ferramenta nenhuma no seu documento."
+            "Widget de chat, anúncio, vídeo: iframe de outra origem sem <code>allow=\"tools\"</code>. Assim ele nêo registra ferramenta nenhuma no seu documento."
           ]
         },
         {
@@ -114,9 +114,9 @@
           ]
         },
         {
-          "titulo": "Não é autorização",
+          "titulo": "Nêo é autorizaçêo",
           "texto": [
-            "Ver a ferramenta não é poder tudo. O backend continua conferindo quem é a pessoa e o que ela pode, como no botão."
+            "Ver a ferramenta nêo é poder tudo. O backend continua conferindo quem é a pessoa e o que ela pode, como no botêo."
           ]
         }
       ]
@@ -166,7 +166,7 @@
           "id": "e10",
           "titulo": "E10 · Sete casos",
           "min": "5 min",
-          "texto": "Rode o bloco <b>exposição</b>.",
+          "texto": "Rode o bloco <b>exposiçêo</b>.",
           "pronto": "<code>7/7 casos conferem com a spec</code> e <code>saída: 0</code>."
         },
         {
@@ -180,7 +180,7 @@
           "id": "e12",
           "titulo": "E12 · Seu site",
           "min": "20 min",
-          "texto": "Escolha as páginas do seu site que não registram ferramenta (login, pagamento, privacidade), configure o cabeçalho no seu servidor e confira cada uma com <code>curl -sI [endereço da página] | grep -i permissions-policy</code>.",
+          "texto": "Escolha as páginas do seu site que nêo registram ferramenta (login, pagamento, privacidade), configure o cabeçalho no seu servidor e confira cada uma com <code>curl -sI [endereço da página] | grep -i permissions-policy</code>.",
           "pronto": "Cada página da lista responde com <code>permissions-policy: tools=()</code>."
         }
       ]
@@ -190,7 +190,7 @@
       "titulo": "Teste da aula",
       "perguntas": [
         {
-          "p": "Um iframe de outra origem registrou com exposedTo apontando o topo, mas o topo não o vê. O que falta?",
+          "p": "Um iframe de outra origem registrou com exposedTo apontando o topo, mas o topo nêo o vê. O que falta?",
           "opcoes": [
             "O topo chamar getTools com fromOrigins apontando o iframe",
             "O iframe trocar exposedTo por http:// para ficar mais aberto",
@@ -208,18 +208,18 @@
             "A página principal, que registra as ferramentas do site",
             "Toda página que tem iframe de vídeo do próprio site",
             "Só as páginas servidas por http:// sem certificado",
-            "A página de pagamento, que não registra ferramenta"
+            "A página de pagamento, que nêo registra ferramenta"
           ],
           "certa": 3,
-          "explica": "tools=() desliga a API no documento e nos iframes dele. Use onde WebMCP não é intenção: protege até de script injetado (§6.4.1).",
+          "explica": "tools=() desliga a API no documento e nos iframes dele. Use onde WebMCP nêo é intençêo: protege até de script injetado (§6.4.1).",
           "ref": "passos"
         },
         {
           "p": "O que acontece com exposedTo: ['http://exemplo.com']?",
           "opcoes": [
             "O topo passa a ver a ferramenta sem precisar de fromOrigins",
-            "registerTool rejeita com SecurityError: origem não confiável",
-            "A ferramenta fica visível para todas as origens do mundo, sem exceção",
+            "registerTool rejeita com SecurityError: origem nêo confiável",
+            "A ferramenta fica visível para todas as origens do mundo, sem exceçêo",
             "Nada muda: a lista é ignorada fora do Chrome Canary"
           ],
           "certa": 1,
@@ -227,15 +227,15 @@
           "ref": "diagrama"
         },
         {
-          "p": "A ferramenta aparece para o topo. Isso autoriza qualquer ação dela?",
+          "p": "A ferramenta aparece para o topo. Isso autoriza qualquer açêo dela?",
           "opcoes": [
             "Sim: se o navegador expôs, o backend pode confiar na chamada",
             "Sim, desde que a página use https em todas as rotas",
-            "Não: o backend confere a pessoa e a permissão, como no botão",
-            "Não, porque o navegador desliga a ferramenta depois de uma chamada"
+            "Nêo: o backend confere a pessoa e a permissêo, como no botêo",
+            "Nêo, porque o navegador desliga a ferramenta depois de uma chamada"
           ],
           "certa": 2,
-          "explica": "Exposição decide quem enxerga. Autorização continua no servidor, igual ao clique da pessoa.",
+          "explica": "Exposiçêo decide quem enxerga. Autorizaçêo continua no servidor, igual ao clique da pessoa.",
           "ref": "passos"
         }
       ]
@@ -245,8 +245,8 @@
       "titulo": "Em três frases",
       "itens": [
         {
-          "t": "Padrão",
-          "texto": "Mesma origem vê; outra origem não vê nada."
+          "t": "Padrêo",
+          "texto": "Mesma origem vê; outra origem nêo vê nada."
         },
         {
           "t": "Iframe",
@@ -254,7 +254,7 @@
         },
         {
           "t": "Desligar",
-          "texto": "tools=() nas páginas que não precisam da API."
+          "texto": "tools=() nas páginas que nêo precisam da API."
         }
       ]
     },
